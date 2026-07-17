@@ -77,7 +77,19 @@ DELETE FROM Students WHERE student_id = 6;
 -- Ismael: SELECT — students who enrolled in 2025
 SELECT name, email FROM Students WHERE enrollment_date < '2026-01-01';
 -- (each member adds theirs the same way)
+-- Joy: UPDATE - Change Dr. Alice Smith's email
+UPDATE Faculty
+SET email = 'dr.alice.smith@alueducation.com'
+WHERE name = 'Dr. Alice Smith';
 
+-- Joy : DELETE - remove John Allen
+DELETE FROM Faculty
+WHERE name = 'John Allen';
+
+--Joy : SELECT - Faculty in the Business department
+SELECT name, email
+FROM Faculty
+WHERE department = 'Business';
 -- 5. GROUP QUERIES
 
 -- Join query 1 (Ismael + Blair): student → course → faculty → classroom
