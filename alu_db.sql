@@ -41,8 +41,24 @@ CREATE TABLE Courses ( ... );
 CREATE TABLE Extra_Curricular_Activities ( ... );
 
 -- JUNCTION TABLES (Hassan)
-CREATE TABLE Student_Courses ( ... );
-CREATE TABLE Student_Activities ( ... );
+
+CREATE TABLE Student_Courses (
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    enrollment_date DATE DEFAULT (CURRENT_DATE),
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id) ON DELETE CASCADE
+ );
+
+CREATE TABLE Student_Activities (
+    student_id INT NOT NULL,
+    activity_id INT NOT NULL,
+    participation_date DATE DEFAULT (CURRENT_DATE),
+    PRIMARY KEY (student_id, activity_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id) ON DELETE CASCADE
+);
 
 -- 3. INSERT STATEMENTS
 
@@ -70,6 +86,23 @@ INSERT INTO Faculty (name, email, department) VALUES
 ('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
 ('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
 ('Jane Mukamana', 'janemukamana@alueducation.com', 'Business');
+
+-- Hassan: insert into Junction Tables
+INSERT INTO Student_Courses (student_id, course_id) VALUES
+(1, 101),
+(1, 102),
+(2, 101),
+(3, 103),
+(4, 102),
+(5, 101);
+
+INSERT INTO Student_Activities (student_id, activity_id) VALUES
+(1, 1),
+(2, 2),
+(3, 1),
+(4, 3),
+(5, 2);
+
 
 -- (and so on for each member)
 
@@ -107,6 +140,22 @@ DELETE FROM Classroom WHERE room_number = 'C105';
 SELECT room_number, building, capacity
 FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
+
+-- Hassan: Individual Update (Change a student's enrollment date in a course)
+UPDATE Student_Courses 
+SET enrollment_date = '2026-02-01' 
+WHERE student_id = 1 AND course_id = 101;
+
+-- Hassan: Individual Delete (Drop a student from an activity)
+DELETE FROM Student_Activities 
+WHERE student_id = 4 AND activity_id = 3;
+
+-- Hassan: Individual Select (See all students enrolled in course 101)
+SELECT student_id, enrollment_date 
+FROM Student_Courses 
+WHERE course_id = 101;
+
+
 -- 5. GROUP QUERIES
 
 -- Join query 1 (Ismael + Blair): student → course → faculty → classroom
@@ -127,7 +176,12 @@ JOIN Faculty f ON a.faculty_advisor_id = f.faculty_id;
 -->
 
 -- Aggregate query (Rosanne + Hassan): COUNT / GROUP BY
-
+SELECT 
+    c.course_name AS 'Course Name', 
+    COUNT(sc.student_id) AS 'Total Students Enrolled'
+FROM Courses c
+LEFT JOIN Student_Courses sc ON c.course_id = sc.course_id
+GROUP BY c.course_id, c.course_name;
 -->
 
 
