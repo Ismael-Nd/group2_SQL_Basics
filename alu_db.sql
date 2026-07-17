@@ -53,6 +53,15 @@ INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
 
 -- Grace: insert into Classroom
 INSERT INTO Classroom ...;
+
+-- Joy: insert into Faculty
+INSERT INTO Faculty (name, email, department) VALUES  
+('Dr. ALice Smith', 'alice.smith@alueducation.com', 'Computer Science'),
+('John Allen', 'johnallen@alueducation.com', 'Software Engineering'),
+('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
+('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
+('Jane Mukamana', 'janemukamana@alueducation.com', 'Business');
+
 -- (and so on for each member)
 
 
