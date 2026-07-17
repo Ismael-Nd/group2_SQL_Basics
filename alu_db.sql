@@ -52,7 +52,7 @@ CREATE TABLE Extra_Curricular_Activities (
     activity_id         INT PRIMARY KEY AUTO_INCREMENT,
     activity_name        VARCHAR(100),
     faculty_advisor_id   INT,
-    schedule_day         VARCHAR(20),
+    category          VARCHAR(20),
     FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
     );
 
@@ -62,11 +62,11 @@ CREATE TABLE Student_Activities ( ... );
 
 -- 3. INSERT STATEMENTS
 INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, schedule_day) VALUES
-('Debate Club', 1, 'Monday'),
-('Robotics Club', 2, 'Wednesday'),
-('Chess Club', 3, 'Tuesday'),
-('Drama Society', 1, 'Thursday'),
-('Football Team', 4, 'Friday');
+('Debate Club', 1, 'Academic'),
+('Robotics Club', 2, 'STEM'),
+('Chess Club', 3, 'Academic'),
+('Drama Society', 1, 'Arts'),
+('Football Team', 4, 'Sports');
 
 -- Grace: insert into Classroom
 INSERT INTO Classroom (room_number, building, capacity) VALUES
@@ -103,31 +103,15 @@ INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Web Development',             4, 2, 1),
 ('Data Structures',             3, 3, 3);
 
--- (and so on for each member)
 
 
 -- 4. INDIVIDUAL UPDATE / DELETE / SELECT (labeled by name)
--- EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa)
--- ===== EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa) =====
-CREATE TABLE Extra_Curricular_Activities (
-    activity_id         INT PRIMARY KEY AUTO_INCREMENT,
-    activity_name        VARCHAR(100),
-    faculty_advisor_id   INT,
-    schedule_day         VARCHAR(20),
-    FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
-);;
 
 -- INSERT sample rows (Christa)
-INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, schedule_day) VALUES
-('Debate Club', 1, 'Monday'),
-('Robotics Club', 2, 'Wednesday'),
-('Chess Club', 3, 'Tuesday'),
-('Drama Society', 1, 'Thursday'),
-('Football Team', 4, 'Friday');
 
 -- UPDATE (Christa)
 UPDATE Extra_Curricular_Activities
-SET schedule_day = 'Saturday'
+SET category = 'Athletics'
 WHERE activity_name = 'Football Team';
 
 -- DELETE (Christa)
@@ -135,7 +119,7 @@ DELETE FROM Extra_Curricular_Activities
 WHERE activity_name = 'Chess Club';
 
 -- SELECT (Christa)
-SELECT * FROM Extra_Curricular_Activities
+SELECT activity_name, category FROM Extra_Curricular_Activities
 WHERE faculty_advisor_id = 1;
 
 -- Ismael: DELETE — remove one student
@@ -144,9 +128,8 @@ DELETE FROM Students WHERE student_id = 6;
 -- Ismael: SELECT — students who enrolled in 2025
 SELECT name, email FROM Students WHERE enrollment_date < '2026-01-01';
 
--- Ismael: UPDATE
-
-UPDATE Students SET email = ... WHERE student_id = 1;
+-- Ismael: UPDATE Email
+UPDATE Students SET email = 'kayirnaga.uwase@gmail.com' WHERE student_id = 1;
 
 -- (each member adds theirs the same way)
 -- Joy: UPDATE - Change Dr. Algice Smith's email
@@ -245,6 +228,5 @@ ORDER BY total_students DESC;
 -- inside the Students table, both of which cause update anomalies. Each
 -- table has a primary key, and every non-key column depends on that key,
 -- so the design satisfies third normal form (3NF).
-
 -- Our tables avoid duplication because... [short paragraph as a comment]
 
