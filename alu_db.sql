@@ -94,7 +94,6 @@ INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 -- (and so on for each member)
 
 
-
 -- 4. INDIVIDUAL UPDATE / DELETE / SELECT (labeled by name)
 
 -- Ismael: DELETE — remove one student
@@ -102,8 +101,13 @@ DELETE FROM Students WHERE student_id = 6;
 
 -- Ismael: SELECT — students who enrolled in 2025
 SELECT name, email FROM Students WHERE enrollment_date < '2026-01-01';
+
+-- Ismael: UPDATE
+
+UPDATE Students SET email = ... WHERE student_id = 1;
+
 -- (each member adds theirs the same way)
--- Joy: UPDATE - Change Dr. Alice Smith's email
+-- Joy: UPDATE - Change Dr. Algice Smith's email
 UPDATE Faculty
 SET email = 'dr.alice.smith@alueducation.com'
 WHERE faculty_id = 1;
