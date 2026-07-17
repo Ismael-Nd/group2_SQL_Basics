@@ -65,7 +65,7 @@ INSERT INTO Classroom (room_number, building, capacity) VALUES
 
 -- Joy: insert into Faculty
 INSERT INTO Faculty (name, email, department) VALUES  
-('Dr. ALice Smith', 'alice.smith@alueducation.com', 'Computer Science'),
+('Dr. Alice Smith', 'alice.smith@alueducation.com', 'Computer Science'),
 ('John Allen', 'johnallen@alueducation.com', 'Software Engineering'),
 ('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
 ('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
@@ -86,7 +86,7 @@ SELECT name, email FROM Students WHERE enrollment_date < '2026-01-01';
 -- Joy: UPDATE - Change Dr. Alice Smith's email
 UPDATE Faculty
 SET email = 'dr.alice.smith@alueducation.com'
-WHERE name = 'Dr. Alice Smith';
+WHERE faculty_id = 1;
 
 -- Joy : DELETE - remove John Allen
 DELETE FROM Faculty
