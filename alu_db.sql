@@ -127,9 +127,6 @@ INSERT INTO Student_Activities (student_id, activity_id) VALUES
 (4, 3),
 (5, 2);
 
-
--- (and so on for each member)
-=======
 -- Blair: Courses sample data
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Introduction to Python',      3, 1, 1),
@@ -138,7 +135,6 @@ INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Entrepreneurial Leadership',  3, 1, 2),
 ('Web Development',             4, 2, 1),
 ('Data Structures',             3, 3, 3);
->>>>>>> c6380ee0815abd973cbdb97ede22593d0b497968
 
 
 
@@ -194,7 +190,6 @@ SELECT room_number, building, capacity
 FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
 
-<<<<<<< HEAD
 -- Hassan: Individual Update (Change a student's enrollment date in a course)
 UPDATE Student_Courses 
 SET enrollment_date = '2026-02-01' 
@@ -209,7 +204,6 @@ SELECT student_id, enrollment_date
 FROM Student_Courses 
 WHERE course_id = 101;
 
-=======
 -- Blair: UPDATE — change a course's credit value
 UPDATE Courses
 SET credits = 5
@@ -223,7 +217,6 @@ WHERE course_id = 6;
 SELECT course_name, credits
 FROM Courses
 WHERE credits >= 3;
->>>>>>> c6380ee0815abd973cbdb97ede22593d0b497968
 
 -- 5. GROUP QUERIES
 
@@ -257,7 +250,7 @@ JOIN Courses c          ON c.classroom_id = cl.classroom_id
 LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
 GROUP BY cl.classroom_id, c.course_id;
 
-<<<<<<< HEAD
+
 -->
 
 -- Aggregate query (Rosanne + Hassan): COUNT / GROUP BY
@@ -268,7 +261,7 @@ FROM Courses c
 LEFT JOIN Student_Courses sc ON c.course_id = sc.course_id
 GROUP BY c.course_id, c.course_name;
 -->
-=======
+
 -- Aggregate query (Rosanne + Hassan): How many students in each course
 SELECT
     c.course_name,
@@ -277,7 +270,7 @@ FROM Courses c
 LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
 GROUP BY c.course_id
 ORDER BY total_students DESC;
->>>>>>> c6380ee0815abd973cbdb97ede22593d0b497968
+
 
 
 -- 6. NORMALIZATION PARAGRAPH (Christa drafts, team reviews)
