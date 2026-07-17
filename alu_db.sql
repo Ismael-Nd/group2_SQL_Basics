@@ -36,7 +36,16 @@ CREATE TABLE Faculty (
 );
 
 -- COURSES TABLE (Blair)
-CREATE TABLE Courses ( ... );
+-- ===== COURSES TABLE (Blair) =====
+CREATE TABLE Courses (
+    course_id    INT PRIMARY KEY AUTO_INCREMENT,
+    course_name  VARCHAR(100),
+    credits      INT,
+    faculty_id   INT,
+    classroom_id INT,
+    FOREIGN KEY (faculty_id)   REFERENCES Faculty(faculty_id),
+    FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
+);
 
 -- EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa)
 CREATE TABLE Extra_Curricular_Activities ( ... );
@@ -72,6 +81,15 @@ INSERT INTO Faculty (name, email, department) VALUES
 ('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
 ('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
 ('Jane Mukamana', 'janemukamana@alueducation.com', 'Business');
+
+-- Blair: Courses sample data
+INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
+('Introduction to Python',      3, 1, 1),
+('Database Systems',            4, 2, 2),
+('Communication Skills',        2, 3, 3),
+('Entrepreneurial Leadership',  3, 1, 2),
+('Web Development',             4, 2, 1),
+('Data Structures',             3, 3, 3);
 
 -- (and so on for each member)
 
@@ -110,6 +128,19 @@ SELECT room_number, building, capacity
 FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
 
+-- Blair: UPDATE — change a course's credit value
+UPDATE Courses
+SET credits = 5
+WHERE course_id = 2;
+
+-- Blair: DELETE — remove one course
+DELETE FROM Courses
+WHERE course_id = 6;
+
+-- Blair: SELECT — all courses worth 3+ credits
+SELECT course_name, credits
+FROM Courses
+WHERE credits >= 3;
 
 -- 5. GROUP QUERIES
 
@@ -133,13 +164,24 @@ JOIN Student_Activities sa ON s.student_id = sa.student_id
 JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id
 JOIN Faculty f ON a.faculty_advisor_id = f.faculty_id;
 
--- Join query 3 (Rosanne): our choice
+-- Join query 3 (Rosanne): Classroom hosts course with N students
+SELECT
+    CONCAT(cl.building, ' room ', cl.room_number) AS classroom,
+    c.course_name,
+    COUNT(sc.student_id) AS enrolled_students
+FROM Classroom cl
+JOIN Courses c          ON c.classroom_id = cl.classroom_id
+LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
+GROUP BY cl.classroom_id, c.course_id;
 
--->
-
--- Aggregate query (Rosanne + Hassan): COUNT / GROUP BY
-
--->
+-- Aggregate query (Rosanne + Hassan): How many students in each course
+SELECT
+    c.course_name,
+    COUNT(sc.student_id) AS total_students
+FROM Courses c
+LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
+GROUP BY c.course_id
+ORDER BY total_students DESC;
 
 
 -- 6. NORMALIZATION PARAGRAPH (Christa drafts, team reviews)
