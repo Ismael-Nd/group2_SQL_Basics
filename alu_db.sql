@@ -122,13 +122,24 @@ JOIN Student_Activities sa ON s.student_id = sa.student_id
 JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id
 JOIN Faculty f ON a.faculty_advisor_id = f.faculty_id;
 
--- Join query 3 (Rosanne): our choice
+-- Join query 3 (Rosanne): Classroom hosts course with N students
+SELECT
+    CONCAT(cl.building, ' room ', cl.room_number) AS classroom,
+    c.course_name,
+    COUNT(sc.student_id) AS enrolled_students
+FROM Classroom cl
+JOIN Courses c          ON c.classroom_id = cl.classroom_id
+LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
+GROUP BY cl.classroom_id, c.course_id;
 
--->
-
--- Aggregate query (Rosanne + Hassan): COUNT / GROUP BY
-
--->
+-- Aggregate query (Rosanne + Hassan): How many students in each course
+SELECT
+    c.course_name,
+    COUNT(sc.student_id) AS total_students
+FROM Courses c
+LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
+GROUP BY c.course_id
+ORDER BY total_students DESC;
 
 
 -- 6. NORMALIZATION PARAGRAPH (Christa drafts, team reviews)
