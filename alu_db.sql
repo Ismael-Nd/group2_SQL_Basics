@@ -79,12 +79,6 @@ CREATE TABLE Student_Activities (
 -- 3. INSERT STATEMENTS
 
 -- Christa
-INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, category) VALUES
-('Debate Club', 1, 'Academic'),
-('Robotics Club', 2, 'STEM'),
-('Chess Club', 3, 'Academic'),
-('Drama Society', 1, 'Arts'),
-('Football Team', 4, 'Sports');
 
 -- Grace: insert into Classroom
 INSERT INTO Classroom (room_number, building, capacity) VALUES
@@ -93,16 +87,6 @@ INSERT INTO Classroom (room_number, building, capacity) VALUES
 ('B201', 'Science Wing', 30),
 ('B202', 'Science Wing', 25),
 ('C105', 'Innovation Hub', 50);
-
--- Ismael: insert into Students 
-INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
-('Kayirnaga Uwase',  'uwase@gmail.com',      1, '2025-09-01'),
-('Aline Mugisha',    'mugisha@gmail.com',    2, '2025-09-01'),
-('Ismail Niyonzima', 'niyonzima@gmail.com',  1, '2026-01-15'),
-('Hassan Karim',     'h.karim@gmail.com',    3, '2026-01-15'),
-('Brian Habimana',   'habimana@gmail.com',   2, '2025-09-01'),
-('Grace Ingabire',   'g.ingabire@gmail.com', 3, '2026-01-15');
-
 
 -- Joy: insert into Faculty
 INSERT INTO Faculty (name, email, department) VALUES  
@@ -113,24 +97,16 @@ INSERT INTO Faculty (name, email, department) VALUES
 ('Jane Mukamana', 'janemukamana@alueducation.com', 'Business'),
 ('Peter Nkusi', 'peternkusi@alueducation.com', 'Mathematics');
 
+-- Ismael: insert into Students 
+INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
+('Kayirnaga Uwase',  'uwase@gmail.com',      1, '2025-09-01'),
+('Aline Mugisha',    'mugisha@gmail.com',    2, '2025-09-01'),
+('Ismail Niyonzima', 'niyonzima@gmail.com',  1, '2026-01-15'),
+('Hassan Karim',     'h.karim@gmail.com',    3, '2026-01-15'),
+('Brian Habimana',   'habimana@gmail.com',   2, '2025-09-01'),
+('Grace Ingabire',   'g.ingabire@gmail.com', 3, '2026-01-15');
 
--- Hassan: insert into Junction Tables
-INSERT INTO Student_Courses (student_id, course_id) VALUES
-(1, 101),
-(1, 102),
-(2, 101),
-(3, 103),
-(4, 102),
-(5, 101);
-
-INSERT INTO Student_Activities (student_id, activity_id) VALUES
-(1, 1),
-(2, 2),
-(3, 1),
-(4, 3),
-(5, 2);
-
--- Blair: Courses sample data
+-- Blair: Courses 
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Introduction to Python',      3, 1, 1),
 ('Database Systems',            4, 2, 2),
@@ -138,6 +114,32 @@ INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Entrepreneurial Leadership',  3, 1, 2),
 ('Web Development',             4, 2, 1),
 ('Data Structures',             3, 3, 3);
+
+
+-- Christa: insert into Extra_Curricular_Activities
+INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, category) VALUES
+('Debate Club', 1, 'Academic'),
+('Robotics Club', 2, 'STEM'),
+('Chess Club', 3, 'Academic'),
+('Drama Society', 1, 'Arts'),
+('Football Team', 4, 'Sports');
+
+-- Hassan: insert into Junction Tables
+INSERT INTO Student_Courses (student_id, course_id) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3),
+(4, 2),
+(5, 1);
+
+INSERT INTO Student_Activities (student_id, activity_id) VALUES
+(1, 1),
+(2, 2),
+(3, 1),
+(4, 4),
+(5, 2);
+
 
 
 
