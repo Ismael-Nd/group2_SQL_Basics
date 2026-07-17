@@ -19,9 +19,13 @@ CREATE TABLE Students (
     FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
 );;
 
--- CLASSROOM TABLE (Grace)
-CREATE TABLE Classroom ( ... );
-
+-- CLASSROOM TABLE
+CREATE TABLE Classroom (
+    classroom_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_number  VARCHAR(10) NOT NULL,
+    building     VARCHAR(50) NOT NULL,
+    capacity     INT NOT NULL
+);
 -- FACULTY TABLE (Joy) 
 CREATE TABLE Faculty ( 
     faculty_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -52,7 +56,12 @@ INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
 ('Grace Ingabire',   'g.ingabire@gmail.com', 3, '2026-01-15');;
 
 -- Grace: insert into Classroom
-INSERT INTO Classroom ...;
+INSERT INTO Classroom (room_number, building, capacity) VALUES
+('A101', 'Main Block', 40),
+('A102', 'Main Block', 35),
+('B201', 'Science Wing', 30),
+('B202', 'Science Wing', 25),
+('C105', 'Innovation Hub', 50);
 
 -- Joy: insert into Faculty
 INSERT INTO Faculty (name, email, department) VALUES  
@@ -68,6 +77,16 @@ INSERT INTO Faculty (name, email, department) VALUES
 
 -- 4. INDIVIDUAL UPDATE / DELETE / SELECT (labeled by name)
 
+-- Grace: UPDATE — increase capacity of B201 after renovation
+UPDATE Classroom SET capacity = 45 WHERE room_number = 'B201';
+
+-- Grace: DELETE — remove classroom C105 (out of service)
+DELETE FROM Classroom WHERE room_number = 'C105';
+
+-- Grace: SELECT — Main Block classrooms seating 35+
+SELECT room_number, building, capacity
+FROM Classroom
+WHERE building = 'Main Block' AND capacity >= 35;
 -- Ismael: UPDATE — fix a student's email
 UPDATE Students SET email = 'uwase@alu.com' WHERE student_id = 1;
 
