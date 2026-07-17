@@ -52,7 +52,7 @@ CREATE TABLE Extra_Curricular_Activities (
     activity_id         INT PRIMARY KEY AUTO_INCREMENT,
     activity_name        VARCHAR(100),
     faculty_advisor_id   INT,
-    category          VARCHAR(20),
+    category          VARCHAR(50),
     FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
     );
 
@@ -61,7 +61,9 @@ CREATE TABLE Student_Courses ( ... );
 CREATE TABLE Student_Activities ( ... );
 
 -- 3. INSERT STATEMENTS
-INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, schedule_day) VALUES
+
+-- Christa
+INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, category) VALUES
 ('Debate Club', 1, 'Academic'),
 ('Robotics Club', 2, 'STEM'),
 ('Chess Club', 3, 'Academic'),
@@ -93,6 +95,7 @@ INSERT INTO Faculty (name, email, department) VALUES
 ('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
 ('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
 ('Jane Mukamana', 'janemukamana@alueducation.com', 'Business');
+('Peter Nkusi', 'peternkusi@alueducation.com', 'Mathematics');
 
 -- Blair: Courses sample data
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
@@ -131,15 +134,14 @@ SELECT name, email FROM Students WHERE enrollment_date < '2026-01-01';
 -- Ismael: UPDATE Email
 UPDATE Students SET email = 'kayirnaga.uwase@gmail.com' WHERE student_id = 1;
 
--- (each member adds theirs the same way)
 -- Joy: UPDATE - Change Dr. Algice Smith's email
 UPDATE Faculty
 SET email = 'dr.alice.smith@alueducation.com'
 WHERE faculty_id = 1;
 
--- Joy : DELETE - remove John Allen
+-- Joy : DELETE - remove Peter Nkusi
 DELETE FROM Faculty
-WHERE name = 'John Allen';
+WHERE name = 'Peter Nkusi';
 
 --Joy : SELECT - Faculty in the Business department
 SELECT name, email
@@ -228,5 +230,4 @@ ORDER BY total_students DESC;
 -- inside the Students table, both of which cause update anomalies. Each
 -- table has a primary key, and every non-key column depends on that key,
 -- so the design satisfies third normal form (3NF).
--- Our tables avoid duplication because... [short paragraph as a comment]
 
