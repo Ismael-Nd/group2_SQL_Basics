@@ -113,18 +113,18 @@ INSERT INTO Faculty (name, email, department) VALUES
 
 -- Hassan: insert into Junction Tables
 INSERT INTO Student_Courses (student_id, course_id) VALUES
-(1, 101),
-(1, 102),
-(2, 101),
-(3, 103),
-(4, 102),
-(5, 101);
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3),
+(4, 2),
+(5, 1);
 
 INSERT INTO Student_Activities (student_id, activity_id) VALUES
 (1, 1),
 (2, 2),
 (3, 1),
-(4, 3),
+(4, 4),
 (5, 2);
 
 -- Blair: Courses sample data
@@ -191,18 +191,16 @@ FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
 
 -- Hassan: Individual Update (Change a student's enrollment date in a course)
-UPDATE Student_Courses 
-SET enrollment_date = '2026-02-01' 
-WHERE student_id = 1 AND course_id = 101;
+UPDATE Student_Courses SET enrollment_date = '2026-02-01' 
+WHERE student_id = 1 AND course_id = 1;
 
 -- Hassan: Individual Delete (Drop a student from an activity)
-DELETE FROM Student_Activities 
-WHERE student_id = 4 AND activity_id = 3;
+DELETE FROM Student_Activities WHERE student_id = 4 AND activity_id = 4;
 
 -- Hassan: Individual Select (See all students enrolled in course 101)
 SELECT student_id, enrollment_date 
 FROM Student_Courses 
-WHERE course_id = 101;
+WHERE course_id = 1;
 
 -- Blair: UPDATE — change a course's credit value
 UPDATE Courses
@@ -289,4 +287,5 @@ ORDER BY total_students DESC;
 -- table has a primary key, and every non-key column depends on that key,
 -- so the design satisfies third normal form (3NF).
 -- Our tables avoid duplication because... [short paragraph as a comment]
+
 
