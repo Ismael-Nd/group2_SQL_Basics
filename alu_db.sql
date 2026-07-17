@@ -259,18 +259,6 @@ JOIN Courses c          ON c.classroom_id = cl.classroom_id
 LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
 GROUP BY cl.classroom_id, c.course_id;
 
-<<<<<<< HEAD
--->
-
--- Aggregate query (Rosanne + Hassan): COUNT / GROUP BY
-SELECT 
-    c.course_name AS 'Course Name', 
-    COUNT(sc.student_id) AS 'Total Students Enrolled'
-FROM Courses c
-LEFT JOIN Student_Courses sc ON c.course_id = sc.course_id
-GROUP BY c.course_id, c.course_name;
--->
-=======
 -- Aggregate query (Rosanne + Hassan): How many students in each course
 SELECT
     c.course_name,
@@ -279,7 +267,6 @@ FROM Courses c
 LEFT JOIN Student_Courses sc ON sc.course_id = c.course_id
 GROUP BY c.course_id
 ORDER BY total_students DESC;
->>>>>>> c6380ee0815abd973cbdb97ede22593d0b497968
 
 
 -- 6. NORMALIZATION PARAGRAPH (Christa drafts, team reviews)
