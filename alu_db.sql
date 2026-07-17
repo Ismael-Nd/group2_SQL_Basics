@@ -35,7 +35,16 @@ CREATE TABLE Faculty (
 );
 
 -- COURSES TABLE (Blair)
-CREATE TABLE Courses ( ... );
+-- ===== COURSES TABLE (Blair) =====
+CREATE TABLE Courses (
+    course_id    INT PRIMARY KEY AUTO_INCREMENT,
+    course_name  VARCHAR(100),
+    credits      INT,
+    faculty_id   INT,
+    classroom_id INT,
+    FOREIGN KEY (faculty_id)   REFERENCES Faculty(faculty_id),
+    FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
+);
 
 -- EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa)
 CREATE TABLE Extra_Curricular_Activities ( ... );
@@ -70,6 +79,15 @@ INSERT INTO Faculty (name, email, department) VALUES
 ('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
 ('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
 ('Jane Mukamana', 'janemukamana@alueducation.com', 'Business');
+
+-- Blair: Courses sample data
+INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
+('Introduction to Python',      3, 1, 1),
+('Database Systems',            4, 2, 2),
+('Communication Skills',        2, 3, 3),
+('Entrepreneurial Leadership',  3, 1, 2),
+('Web Development',             4, 2, 1),
+('Data Structures',             3, 3, 3);
 
 -- (and so on for each member)
 
@@ -107,6 +125,21 @@ DELETE FROM Classroom WHERE room_number = 'C105';
 SELECT room_number, building, capacity
 FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
+
+-- Blair: UPDATE — change a course's credit value
+UPDATE Courses
+SET credits = 5
+WHERE course_id = 2;
+
+-- Blair: DELETE — remove one course
+DELETE FROM Courses
+WHERE course_id = 6;
+
+-- Blair: SELECT — all courses worth 3+ credits
+SELECT course_name, credits
+FROM Courses
+WHERE credits >= 3;
+
 -- 5. GROUP QUERIES
 
 -- Join query 1 (Ismael + Blair): student → course → faculty → classroom
