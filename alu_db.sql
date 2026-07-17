@@ -110,7 +110,7 @@ INSERT INTO Faculty (name, email, department) VALUES
 ('John Allen', 'johnallen@alueducation.com', 'Software Engineering'),
 ('Simeon Karekezi', 'simeonkare@alueducation.com', 'Leadership Skills'),
 ('Belyse Keza', 'belysekez@alueducation.com', 'Communication'),
-('Jane Mukamana', 'janemukamana@alueducation.com', 'Business');
+('Jane Mukamana', 'janemukamana@alueducation.com', 'Business'),
 ('Peter Nkusi', 'peternkusi@alueducation.com', 'Mathematics');
 
 
@@ -130,9 +130,6 @@ INSERT INTO Student_Activities (student_id, activity_id) VALUES
 (4, 3),
 (5, 2);
 
-
--- (and so on for each member)
-=======
 -- Blair: Courses sample data
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Introduction to Python',      3, 1, 1),
@@ -141,7 +138,6 @@ INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Entrepreneurial Leadership',  3, 1, 2),
 ('Web Development',             4, 2, 1),
 ('Data Structures',             3, 3, 3);
->>>>>>> c6380ee0815abd973cbdb97ede22593d0b497968
 
 
 
@@ -196,22 +192,6 @@ SELECT room_number, building, capacity
 FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
 
-<<<<<<< HEAD
--- Hassan: Individual Update (Change a student's enrollment date in a course)
-UPDATE Student_Courses 
-SET enrollment_date = '2026-02-01' 
-WHERE student_id = 1 AND course_id = 101;
-
--- Hassan: Individual Delete (Drop a student from an activity)
-DELETE FROM Student_Activities 
-WHERE student_id = 4 AND activity_id = 3;
-
--- Hassan: Individual Select (See all students enrolled in course 101)
-SELECT student_id, enrollment_date 
-FROM Student_Courses 
-WHERE course_id = 101;
-
-=======
 -- Blair: UPDATE — change a course's credit value
 UPDATE Courses
 SET credits = 5
@@ -225,7 +205,6 @@ WHERE course_id = 6;
 SELECT course_name, credits
 FROM Courses
 WHERE credits >= 3;
->>>>>>> c6380ee0815abd973cbdb97ede22593d0b497968
 
 -- 5. GROUP QUERIES
 
