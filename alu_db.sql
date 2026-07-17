@@ -23,7 +23,12 @@ CREATE TABLE Students (
 CREATE TABLE Classroom ( ... );
 
 -- FACULTY TABLE (Joy) 
-CREATE TABLE Faculty ( ... );
+CREATE TABLE Faculty ( 
+    faculty_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    department VARCHAR(50)
+);
 
 -- COURSES TABLE (Blair)
 CREATE TABLE Courses ( ... );
