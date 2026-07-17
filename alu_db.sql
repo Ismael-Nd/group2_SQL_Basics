@@ -38,13 +38,25 @@ CREATE TABLE Faculty (
 CREATE TABLE Courses ( ... );
 
 -- EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa)
-CREATE TABLE Extra_Curricular_Activities ( ... );
+CREATE TABLE Extra_Curricular_Activities (  
+    activity_id         INT PRIMARY KEY AUTO_INCREMENT,
+    activity_name        VARCHAR(100),
+    faculty_advisor_id   INT,
+    schedule_day         VARCHAR(20),
+    FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
+    );
 
 -- JUNCTION TABLES (Hassan)
 CREATE TABLE Student_Courses ( ... );
 CREATE TABLE Student_Activities ( ... );
 
 -- 3. INSERT STATEMENTS
+INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, schedule_day) VALUES
+('Debate Club', 1, 'Monday'),
+('Robotics Club', 2, 'Wednesday'),
+('Chess Club', 3, 'Tuesday'),
+('Drama Society', 1, 'Thursday'),
+('Football Team', 4, 'Friday');
 
 -- Ismael: insert into Students 
 INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
@@ -76,6 +88,36 @@ INSERT INTO Faculty (name, email, department) VALUES
 
 
 -- 4. INDIVIDUAL UPDATE / DELETE / SELECT (labeled by name)
+-- EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa)
+-- ===== EXTRA_CURRICULAR_ACTIVITIES TABLE (Christa) =====
+CREATE TABLE Extra_Curricular_Activities (
+    activity_id         INT PRIMARY KEY AUTO_INCREMENT,
+    activity_name        VARCHAR(100),
+    faculty_advisor_id   INT,
+    schedule_day         VARCHAR(20),
+    FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
+);;
+
+-- INSERT sample rows (Christa)
+INSERT INTO Extra_Curricular_Activities (activity_name, faculty_advisor_id, schedule_day) VALUES
+('Debate Club', 1, 'Monday'),
+('Robotics Club', 2, 'Wednesday'),
+('Chess Club', 3, 'Tuesday'),
+('Drama Society', 1, 'Thursday'),
+('Football Team', 4, 'Friday');
+
+-- UPDATE (Christa)
+UPDATE Extra_Curricular_Activities
+SET schedule_day = 'Saturday'
+WHERE activity_name = 'Football Team';
+
+-- DELETE (Christa)
+DELETE FROM Extra_Curricular_Activities
+WHERE activity_name = 'Chess Club';
+
+-- SELECT (Christa)
+SELECT * FROM Extra_Curricular_Activities
+WHERE faculty_advisor_id = 1;
 
 -- Ismael: DELETE — remove one student
 DELETE FROM Students WHERE student_id = 6;
@@ -133,6 +175,19 @@ JOIN Faculty f ON a.faculty_advisor_id = f.faculty_id;
 
 -- 6. NORMALIZATION PARAGRAPH (Christa drafts, team reviews)
 
+-- Our schema avoids data duplication by keeping each fact in exactly one
+-- table. Faculty details (name, email, department) are stored once in
+-- Faculty and referenced by ID from Courses and
+-- Extra_Curricular_Activities, rather than repeating advisor names in
+-- each row. Classroom details live only in Classroom and are referenced
+-- by Students and Courses. The many-to-many relationships (a student
+-- takes many courses, a course has many students; likewise for
+-- activities) are handled by the junction tables Student_Courses and
+-- Student_Activities, which store only ID pairs. Without them we would
+-- either repeat full student rows per course or store course lists
+-- inside the Students table, both of which cause update anomalies. Each
+-- table has a primary key, and every non-key column depends on that key,
+-- so the design satisfies third normal form (3NF).
 
 -- Our tables avoid duplication because... [short paragraph as a comment]
 
