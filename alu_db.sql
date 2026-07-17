@@ -19,7 +19,7 @@ CREATE TABLE Students (
     FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
 );;
 
--- CLASSROOM TABLE
+-- CLASSROOM TABLE (Grace)
 CREATE TABLE Classroom (
     classroom_id INT PRIMARY KEY AUTO_INCREMENT,
     room_number  VARCHAR(10) NOT NULL,
@@ -77,19 +77,6 @@ INSERT INTO Faculty (name, email, department) VALUES
 
 -- 4. INDIVIDUAL UPDATE / DELETE / SELECT (labeled by name)
 
--- Grace: UPDATE — increase capacity of B201 after renovation
-UPDATE Classroom SET capacity = 45 WHERE room_number = 'B201';
-
--- Grace: DELETE — remove classroom C105 (out of service)
-DELETE FROM Classroom WHERE room_number = 'C105';
-
--- Grace: SELECT — Main Block classrooms seating 35+
-SELECT room_number, building, capacity
-FROM Classroom
-WHERE building = 'Main Block' AND capacity >= 35;
--- Ismael: UPDATE — fix a student's email
-UPDATE Students SET email = 'uwase@alu.com' WHERE student_id = 1;
-
 -- Ismael: DELETE — remove one student
 DELETE FROM Students WHERE student_id = 6;
 
@@ -109,6 +96,17 @@ WHERE name = 'John Allen';
 SELECT name, email
 FROM Faculty
 WHERE department = 'Business';
+
+-- Grace: UPDATE — increase capacity of B201 after renovation
+UPDATE Classroom SET capacity = 45 WHERE room_number = 'B201';
+
+-- Grace: DELETE — remove classroom C105 (out of service)
+DELETE FROM Classroom WHERE room_number = 'C105';
+
+-- Grace: SELECT — Main Block classrooms seating 35+
+SELECT room_number, building, capacity
+FROM Classroom
+WHERE building = 'Main Block' AND capacity >= 35;
 -- 5. GROUP QUERIES
 
 -- Join query 1 (Ismael + Blair): student → course → faculty → classroom
@@ -117,7 +115,12 @@ WHERE department = 'Business';
 
 -- Join query 2 (Grace + Joy): student → activity → faculty
 
--->
+SELECT CONCAT(s.name, ' participates in ', a.activity_name,
+              ', advised by ', f.name, '.') AS sentence
+FROM Students s
+JOIN Student_Activities sa ON s.student_id = sa.student_id
+JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id
+JOIN Faculty f ON a.faculty_advisor_id = f.faculty_id;
 
 -- Join query 3 (Rosanne): our choice
 
