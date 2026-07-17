@@ -8,6 +8,14 @@ USE group2_alu_db;
 
 -- 2. CREATE TABLES (in dependency order!)
 
+-- CLASSROOM TABLE (Grace)
+CREATE TABLE Classroom (
+    classroom_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_number  VARCHAR(10) NOT NULL,
+    building     VARCHAR(50) NOT NULL,
+    capacity     INT NOT NULL
+);
+
 -- STUDENTS TABLE (Ismael)
 -- ===== STUDENTS TABLE (Ismael) =====
 CREATE TABLE Students (
@@ -17,15 +25,8 @@ CREATE TABLE Students (
     classroom_id     INT,
     enrollment_date  DATE,
     FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
-);;
-
--- CLASSROOM TABLE (Grace)
-CREATE TABLE Classroom (
-    classroom_id INT PRIMARY KEY AUTO_INCREMENT,
-    room_number  VARCHAR(10) NOT NULL,
-    building     VARCHAR(50) NOT NULL,
-    capacity     INT NOT NULL
 );
+
 -- FACULTY TABLE (Joy) 
 CREATE TABLE Faculty ( 
     faculty_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -46,15 +47,6 @@ CREATE TABLE Student_Activities ( ... );
 
 -- 3. INSERT STATEMENTS
 
--- Ismael: insert into Students 
-INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
-('Kayirnaga Uwase',  'uwase@gmail.com',      1, '2025-09-01'),
-('Aline Mugisha',    'mugisha@gmail.com',    2, '2025-09-01'),
-('Ismail Niyonzima', 'niyonzima@gmail.com',  1, '2026-01-15'),
-('Hassan Karim',     'h.karim@gmail.com',    3, '2026-01-15'),
-('Brian Habimana',   'habimana@gmail.com',   2, '2025-09-01'),
-('Grace Ingabire',   'g.ingabire@gmail.com', 3, '2026-01-15');;
-
 -- Grace: insert into Classroom
 INSERT INTO Classroom (room_number, building, capacity) VALUES
 ('A101', 'Main Block', 40),
@@ -62,6 +54,16 @@ INSERT INTO Classroom (room_number, building, capacity) VALUES
 ('B201', 'Science Wing', 30),
 ('B202', 'Science Wing', 25),
 ('C105', 'Innovation Hub', 50);
+
+-- Ismael: insert into Students 
+INSERT INTO Students (name, email, classroom_id, enrollment_date) VALUES
+('Kayirnaga Uwase',  'uwase@gmail.com',      1, '2025-09-01'),
+('Aline Mugisha',    'mugisha@gmail.com',    2, '2025-09-01'),
+('Ismail Niyonzima', 'niyonzima@gmail.com',  1, '2026-01-15'),
+('Hassan Karim',     'h.karim@gmail.com',    3, '2026-01-15'),
+('Brian Habimana',   'habimana@gmail.com',   2, '2025-09-01'),
+('Grace Ingabire',   'g.ingabire@gmail.com', 3, '2026-01-15');
+
 
 -- Joy: insert into Faculty
 INSERT INTO Faculty (name, email, department) VALUES  
@@ -107,11 +109,20 @@ DELETE FROM Classroom WHERE room_number = 'C105';
 SELECT room_number, building, capacity
 FROM Classroom
 WHERE building = 'Main Block' AND capacity >= 35;
+
+
 -- 5. GROUP QUERIES
 
 -- Join query 1 (Ismael + Blair): student → course → faculty → classroom
 
--->
+SELECT CONCAT(s.name, ' is enrolled in ', c.course_name,
+              ', taught by ', f.name,
+              ', in ', cl.building, ' room ', cl.room_number) AS sentence
+FROM Students s
+JOIN Student_Courses sc ON s.student_id  = sc.student_id
+JOIN Courses c          ON sc.course_id  = c.course_id
+JOIN Faculty f          ON c.faculty_id  = f.faculty_id
+JOIN Classroom cl       ON c.classroom_id = cl.classroom_id;
 
 -- Join query 2 (Grace + Joy): student → activity → faculty
 
